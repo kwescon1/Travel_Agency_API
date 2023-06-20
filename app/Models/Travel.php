@@ -9,7 +9,7 @@ class Travel extends Model
 {
     use HasFactory;
 
-    protected $table = 'travel';
+    protected $table = 'travels';
 
     protected $guarded = ['id'];
 
