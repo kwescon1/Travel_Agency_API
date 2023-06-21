@@ -25,6 +25,7 @@ Route::get('travels/{travel:slug}/tours', [\App\Http\Controllers\Api\v1\TourCont
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::apiResource('travels', \App\Http\Controllers\Api\v1\TravelController::class)->only(['store', 'update']);
+    Route::post('travels/{travel}/tours', [\App\Http\Controllers\Api\v1\TourController::class, 'store']);
 });
 
 /**
