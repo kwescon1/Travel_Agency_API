@@ -23,9 +23,16 @@ Route::apiResource('travels', \App\Http\Controllers\Api\v1\TravelController::cla
 //:slug means the travel search should be by slug
 Route::get('travels/{travel:slug}/tours', [\App\Http\Controllers\Api\v1\TourController::class, 'index']);
 
-Route::prefix('admin')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
-    Route::apiResource('travels', \App\Http\Controllers\Api\v1\TravelController::class)->only(['store', 'update']);
-    Route::post('travels/{travel}/tours', [\App\Http\Controllers\Api\v1\TourController::class, 'store']);
+Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
+    Route::middleware('role:admin')->group(function () {
+
+        Route::apiResource('travels', \App\Http\Controllers\Api\v1\TravelController::class)->only('store');
+
+        Route::post('travels/{travel}/tours', [\App\Http\Controllers\Api\v1\TourController::class, 'store']);
+
+    });
+
+    Route::apiResource('travels', \App\Http\Controllers\Api\v1\TravelController::class)->only('update');
 });
 
 /**
