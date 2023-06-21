@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TourRequest;
 use App\Http\Requests\ToursListRequest;
 use App\Http\Resources\TourResource;
 use App\Models\Travel;
@@ -37,5 +38,15 @@ class TourController extends Controller
         // return Tour::where('travel_id',$travel->id)->orderBy('start_date')->get();
 
         return TourResource::collection($tours);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Travel $travel, TourRequest $request)
+    {
+        $tour = $travel->tours()->create($request->validated());
+
+        return new TourResource($tour);
     }
 }
