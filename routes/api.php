@@ -19,3 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('travels',\App\Http\Controllers\Api\v1\TravelController::class)->only('index');
+
+//:slug means the travel search should be by slug
+Route::get('travels/{travel:slug}/tours',[\App\Http\Controllers\Api\v1\TourController::class,'index']);
+
