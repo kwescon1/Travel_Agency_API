@@ -2,16 +2,12 @@
 
 The Travel Agency API is a simple RESTful web service that provides various endpoints to manage and retrieve information related to travels and tours. It offers both private (admin) endpoints for managing data and public (no auth) endpoints for accessing publicly available information.
 
+### Create Admin User
+
+-   To create an admin user run the below command
+    -   php artisan users:create
+
 ## Private Endpoints
-
-### Create User Endpoint
-
--   Endpoint: `/api/admin/users`
--   Method: POST
--   Description: Creates a new user in the system.
--   Authentication: Requires admin authentication.
--   Request Body: JSON object containing user details.
--   Response: JSON response with the created user's information.
 
 ### Create Travel Endpoint
 
