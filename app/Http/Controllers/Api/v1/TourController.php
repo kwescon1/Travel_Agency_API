@@ -32,21 +32,21 @@ class TourController extends Controller
     {
 
         $tours = $travel->tours()
-            ->when($request->priceFrom, function ($query) use ($request) {
-                $query->where('price', '>=', $request->priceFrom * 100);
+            ->when($request->priceFrom, function ($query, $priceFrom) {
+                $query->where('price', '>=', $priceFrom * 100);
             })
-            ->when($request->priceTo, function ($query) use ($request) {
-                $query->where('price', '<=', $request->priceTo * 100);
+            ->when($request->priceTo, function ($query, $priceTo) {
+                $query->where('price', '<=', $priceTo * 100);
             })
-            ->when($request->dateFrom, function ($query) use ($request) {
-                $query->where('start_date', '>=', $request->dateFrom);
+            ->when($request->dateFrom, function ($query, $dateFrom) {
+                $query->where('start_date', '>=', $dateFrom);
             })
-            ->when($request->dateTo, function ($query) use ($request) {
-                $query->where('start_date', '<=', $request->dateTo);
+            ->when($request->dateTo, function ($query, $dateTo) {
+                $query->where('start_date', '<=', $dateTo);
             })
-            ->when($request->sortBy && $request->sortOrder, function ($query) use ($request) {
-                $query->orderBy($request->sortBy,
-                    $request->sortOrder);
+            ->when($request->sortBy && $request->sortOrder, function ($query, $sortBy, $sortOrder) {
+                $query->orderBy($sortBy,
+                    $sortOrder);
             })
             ->orderBy('start_date')->paginate(10);
 
